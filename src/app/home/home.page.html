@@ -9,13 +9,14 @@
 <ion-content [fullscreen]="true">
   <div id="container">
     <ion-list>
-      <ion-item>
+      <!-- f será a variavel de controle do laço -->
+      <ion-item *ngFor="let f of feriados">
         <ion-label>
-          <h2>Ano Novo</h2>
-          <p>Mundial - Feriado</p>
+          <h2>{{ f.nomeDoFeriado }}</h2>
+          <p>{{ f.levelDoFeriado }} - {{ f.tipoDoFeriado }}</p>
         </ion-label>
         <ion-note slot="end">
-          <h2>01/01/2024</h2>
+          <h2>{{ f.dataDoFeriados }}</h2>
         </ion-note>
       </ion-item>
     </ion-list>

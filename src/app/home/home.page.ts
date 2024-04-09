@@ -17,13 +17,32 @@ export class HomePage {
   criarFeriados() {
 
     this.feriados = [
-      {nome: 'Rafael'},
-      {nome: 'Vitoria'},
-      {nome: 'Andre'},
-      {nome: 'Luciano cruzeirense'}
+      { // Inicio da posição 0
+        nomeDoFeriado : 'Ano Novo',
+        levelDoFeriado: 'Mundial',
+        tipoDoFeriado : 'Feriado',
+        dataDoFeriado : '01/01/2024'
+      }, // Final da posição 0
+      { // Inicio da posição 1
+        nomeDoFeriado : 'Carnaval',
+        levelDoFeriado: 'Nacional',
+        tipoDoFeriado : 'Feriado',
+        dataDoFeriado : '12/02/2024 - 13/02/2024'
+      }, // Final da posição 1
+      { // Inicio da posição 2
+        nomeDoFeriado : 'Quarta-feira de Cinzas',
+        levelDoFeriado: 'Nacional',
+        tipoDoFeriado : 'Facultativo',
+        dataDoFeriado : '14/02/2024'
+      }, // Final da posição 2
     ];
 
-    console.log(this.feriados);
+    // for
+    //foreach
+
+    for(let i = 0; i < this.feriados.length; i++){
+      console.log(this.feriados[i])
+    }
 
   }
 
