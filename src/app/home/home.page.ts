@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -9,40 +10,36 @@ export class HomePage {
 
   public feriados: any = []; 
 
-  constructor() { // Será executado toda vez que a página for carregada
+  constructor(
+    public http: HttpClient
+  ) { // Será executado toda vez que a página for carregada
     this.criarFeriados();
   }
 
   //Função responsável por criar os feriados dentro da variavel this.feriados
   criarFeriados() {
+    const apiToken = "6901|I4Hxgnuye4cigDKZFZm7E6EvqxfiMwtO";
+    const ano = "2024";
+    const url = `https://api.invertexto.com/v1/holidays/${ano}?token=${apiToken}`;
 
-    this.feriados = [
-      { // Inicio da posição 0
-        nomeDoFeriado : 'Ano Novo',
-        levelDoFeriado: 'Mundial',
-        tipoDoFeriado : 'Feriado',
-        dataDoFeriado : '01/01/2024'
-      }, // Final da posição 0
-      { // Inicio da posição 1
-        nomeDoFeriado : 'Carnaval',
-        levelDoFeriado: 'Nacional',
-        tipoDoFeriado : 'Feriado',
-        dataDoFeriado : '12/02/2024 - 13/02/2024'
-      }, // Final da posição 1
-      { // Inicio da posição 2
-        nomeDoFeriado : 'Quarta-feira de Cinzas',
-        levelDoFeriado: 'Nacional',
-        tipoDoFeriado : 'Facultativo',
-        dataDoFeriado : '14/02/2024'
-      }, // Final da posição 2
-    ];
+    this.http.get(url).subscribe((retorno) => {
+      this.feriados = retorno;
+    });
+  }
 
-    // for
-    //foreach
+  //Formatar a data para o padrão brasileiro
+  formatarDataParaBr(data: string){
+    
+    //2024-01-01
+    // 2024 - 0
+    // 01   - 1
+    // 01   - 2
 
-    for(let i = 0; i < this.feriados.length; i++){
-      console.log(this.feriados[i])
-    }
+    //01/01/2024
+
+    let partes = data.split('-');
+    return `${partes[2]}/${partes[1]}/${partes[0]}`;
+
 
   }
 

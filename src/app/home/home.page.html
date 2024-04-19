@@ -7,16 +7,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div id="container">
+  <div>
     <ion-list>
       <!-- f será a variavel de controle do laço -->
       <ion-item *ngFor="let f of feriados">
         <ion-label>
-          <h2>{{ f.nomeDoFeriado }}</h2>
-          <p>{{ f.levelDoFeriado }} - {{ f.tipoDoFeriado }}</p>
+          <h2>{{ f.name }}</h2>
+          <p>{{ f.level.toUpperCase() }} - {{ f.type.toUpperCase() }}</p>
         </ion-label>
         <ion-note slot="end">
-          <h2>{{ f.dataDoFeriados }}</h2>
+          <h2>{{ formatarDataParaBr(f.date) }}</h2>
         </ion-note>
       </ion-item>
     </ion-list>
