@@ -8,6 +8,17 @@
 
 <ion-content [fullscreen]="true">
   <div>
+    <ion-item>
+      <ion-label>Selecione um ano</ion-label>
+      <ion-select [(ngModel)]="anoAtual" (ionChange)="criarFeriados()" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Selecione um ano">
+        <ion-select-option *ngFor="let ano of anos" [value]="ano">
+          {{ ano }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+
+  <div id="div-feriados">
     <ion-list>
       <!-- f será a variavel de controle do laço -->
       <ion-item *ngFor="let f of feriados">

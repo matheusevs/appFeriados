@@ -8,39 +8,49 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  public feriados: any = []; 
+  public feriados: any = [];
+  public anos: number[] = [];
+  public anoAtual: number = new Date().getFullYear();
 
+  customActionSheetOptions: any = {
+    header: 'Selecione um ano para buscar os feriados',
+  };
+  
   constructor(
     public http: HttpClient
   ) { // Será executado toda vez que a página for carregada
-    this.criarFeriados();
+    this.criarAnos();
   }
 
   //Função responsável por criar os feriados dentro da variavel this.feriados
   criarFeriados() {
     const apiToken = "6901|I4Hxgnuye4cigDKZFZm7E6EvqxfiMwtO";
-    const ano = "2024";
-    const url = `https://api.invertexto.com/v1/holidays/${ano}?token=${apiToken}`;
+    const url = `https://api.invertexto.com/v1/holidays/${this.anoAtual}?token=${apiToken}`;
 
     this.http.get(url).subscribe((retorno) => {
       this.feriados = retorno;
     });
+
+    const divElemento = document.getElementById('div-feriados');
+    if (divElemento) {
+      divElemento.style.display = 'block';
+    }
   }
 
   //Formatar a data para o padrão brasileiro
   formatarDataParaBr(data: string){
-    
-    //2024-01-01
-    // 2024 - 0
-    // 01   - 1
-    // 01   - 2
-
-    //01/01/2024
-
     let partes = data.split('-');
     return `${partes[2]}/${partes[1]}/${partes[0]}`;
+  }
 
+  //Função responsável por criar os anos dentro da variável this.anos
+  criarAnos() {
+    const anoInicial = this.anoAtual - 20;
+    const anoFinal = this.anoAtual + 20;
 
+    for (let ano = anoInicial; ano <= anoFinal; ano++) {
+      this.anos.push(ano);
+    }
   }
 
 }
